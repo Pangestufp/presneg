@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepPurpleAccent,
+        backgroundColor: Color(0xFF540780),
         title: _selecIndex == 0
             ? Text(
                 'Beranda',
@@ -255,7 +255,7 @@ class _HomeState extends State<Home> {
                         contentPadding:
                             EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                         leading: CircleAvatar(
-                          backgroundColor: Colors.deepPurple,
+                          backgroundColor: Colors.deepPurpleAccent,
                           child: Icon(Icons.bookmark, color: Colors.white),
                         ),
                         title: Text(
