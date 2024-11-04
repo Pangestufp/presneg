@@ -75,67 +75,126 @@ class _SewaState extends State<Sewa> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cari Mobil"),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextField(
-              onChanged: (query) => _filterMobil(query),
-              decoration: InputDecoration(
-                labelText: 'Cari Mobil',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.search),
+        iconTheme: IconThemeData(
+          color: Colors.white, // Ubah warna ikon menjadi putih
+        ),
+        backgroundColor: Color(0xFFa434eb),
+        title: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: TextField(
+            onChanged: (query) => _filterMobil(query),
+            style: TextStyle(color: Colors.white),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(vertical: 0),
+              hintText: 'Cari Mobil',
+              hintStyle: TextStyle(color: Colors.white70),
+              filled: true,
+              fillColor: Colors.white.withOpacity(0.1),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(30.0),
+                borderSide: BorderSide.none,
               ),
+              prefixIcon: Icon(Icons.search, color: Colors.white),
             ),
           ),
-          Expanded(
-            child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 1,
-                childAspectRatio: 3 / 2,
-              ),
-              itemCount: displayedMobil.length,
-              itemBuilder: (context, index) {
-                final mobil = displayedMobil[index];
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => DetailSewa(mobil: mobil,)));
-                  },
-                  child: Card(
-                    child: Column(
-                      children: [
-                        Image.asset(
-                          '${mobil.foto}',
-                          height: 200,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                mobil.namaMobil,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16),
-                              ),
-                              Text(mobil.harga),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+        ),
+      ),
+      body: Container(
+        padding: EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFFa434eb), Color(0xFFe2c7fa)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            childAspectRatio: 3 / 4,
+          ),
+          itemCount: displayedMobil.length,
+          itemBuilder: (context, index) {
+            final mobil = displayedMobil[index];
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DetailSewa(mobil: mobil)),
                 );
               },
-            ),
-          ),
-        ],
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                elevation: 5,
+                color: Colors.white,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+                      child: Image.asset(
+                        mobil.foto,
+                        height: 100,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            mobil.namaMobil,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                              color: Colors.deepPurple,
+                            ),
+                          ),
+                          SizedBox(height: 6),
+                          Text(
+                            mobil.harga,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey[700],
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color(0xFFa434eb),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailSewa(mobil: mobil),
+                                ),
+                              );
+                            },
+                            child: Text(
+                              'Detail',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
+
 }

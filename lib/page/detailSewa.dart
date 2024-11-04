@@ -17,9 +17,13 @@ class _DetailSewaState extends State<DetailSewa> {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Color(0xFFa434eb); // Warna utama (ungu)
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.mobil.namaMobil),
+        backgroundColor: primaryColor,
+        foregroundColor: Colors.white, // Warna teks pada AppBar
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -27,16 +31,24 @@ class _DetailSewaState extends State<DetailSewa> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
-              child: Image.asset(
-                '${widget.mobil.foto}',
-                height: 200,
-                fit: BoxFit.cover,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(
+                    12.0), // Membuat gambar memiliki sudut melengkung
+                child: Image.asset(
+                  '${widget.mobil.foto}',
+                  height: 200,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
             SizedBox(height: 16),
             Text(
               widget.mobil.namaMobil,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: primaryColor,
+              ),
             ),
             SizedBox(height: 8),
             Text(
@@ -46,31 +58,20 @@ class _DetailSewaState extends State<DetailSewa> {
             SizedBox(height: 16),
             Text(
               "Deskripsi:",
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: primaryColor,
+              ),
             ),
             SizedBox(height: 8),
             Text(
               "Mobil ${widget.mobil.namaMobil} adalah kendaraan yang nyaman dan cocok untuk perjalanan dalam kota maupun luar kota. "
-                  "Dilengkapi dengan fitur keamanan dan kenyamanan terbaik di kelasnya.",
-              style: TextStyle(fontSize: 16), textAlign: TextAlign.justify,
+              "Dilengkapi dengan fitur keamanan dan kenyamanan terbaik di kelasnya.",
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.justify,
             ),
             Spacer(),
-            // SizedBox(
-            //   width: double.infinity,
-            //   child: ElevatedButton(
-            //     onPressed: () {
-            //       //saya ingin memunculkan sebuah modal sheet dimana bisa memilih tanggal (tanggal sewa dan selesai sewa), pilih perlu supir atau tidak, Pilihan Transmisi (manual atau matic)
-            //
-            //       ScaffoldMessenger.of(context).showSnackBar(
-            //         SnackBar(content: Text("Penyewaan mobil ${widget.mobil.namaMobil} sedang di Proses")),
-            //       );
-            //     },
-            //     child: Text("Sewa Sekarang", style: TextStyle(fontSize: 18)),
-            //     style: ElevatedButton.styleFrom(
-            //       padding: EdgeInsets.symmetric(vertical: 15),
-            //     ),
-            //   ),
-            // ),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -80,29 +81,37 @@ class _DetailSewaState extends State<DetailSewa> {
                     builder: (BuildContext context) {
                       return SingleChildScrollView(
                         child: StatefulBuilder(
-                          builder: (BuildContext context, StateSetter setState) {
-
+                          builder:
+                              (BuildContext context, StateSetter setState) {
                             return Padding(
                               padding: const EdgeInsets.all(16.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  // Tanggal Sewa
                                   ListTile(
-                                    title: Text("Tanggal Sewa"),
+                                    title: Text(
+                                      "Tanggal Sewa",
+                                      style: TextStyle(
+                                        color: primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                     subtitle: Text(
                                       startDate != null
                                           ? "${startDate!.day}-${startDate!.month}-${startDate!.year}"
                                           : "Belum dipilih",
                                     ),
                                     trailing: IconButton(
-                                      icon: Icon(Icons.calendar_today),
+                                      icon: Icon(Icons.calendar_today,
+                                          color: primaryColor),
                                       onPressed: () async {
-                                        DateTime? pickedDate = await showDatePicker(
+                                        DateTime? pickedDate =
+                                            await showDatePicker(
                                           context: context,
                                           initialDate: DateTime.now(),
                                           firstDate: DateTime.now(),
-                                          lastDate: DateTime.now().add(Duration(days: 365)),
+                                          lastDate: DateTime.now()
+                                              .add(Duration(days: 365)),
                                         );
                                         if (pickedDate != null) {
                                           setState(() {
@@ -112,22 +121,30 @@ class _DetailSewaState extends State<DetailSewa> {
                                       },
                                     ),
                                   ),
-                                  // Tanggal Selesai Sewa
                                   ListTile(
-                                    title: Text("Tanggal Selesai Sewa"),
+                                    title: Text(
+                                      "Tanggal Selesai Sewa",
+                                      style: TextStyle(
+                                        color: primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                     subtitle: Text(
                                       endDate != null
                                           ? "${endDate!.day}-${endDate!.month}-${endDate!.year}"
                                           : "Belum dipilih",
                                     ),
                                     trailing: IconButton(
-                                      icon: Icon(Icons.calendar_today),
+                                      icon: Icon(Icons.calendar_today,
+                                          color: primaryColor),
                                       onPressed: () async {
-                                        DateTime? pickedDate = await showDatePicker(
+                                        DateTime? pickedDate =
+                                            await showDatePicker(
                                           context: context,
                                           initialDate: DateTime.now(),
                                           firstDate: DateTime.now(),
-                                          lastDate: DateTime.now().add(Duration(days: 365)),
+                                          lastDate: DateTime.now()
+                                              .add(Duration(days: 365)),
                                         );
                                         if (pickedDate != null) {
                                           setState(() {
@@ -137,19 +154,30 @@ class _DetailSewaState extends State<DetailSewa> {
                                       },
                                     ),
                                   ),
-                                  // Pilihan Supir
                                   CheckboxListTile(
-                                    title: Text("Perlu Supir"),
+                                    title: Text(
+                                      "Perlu Supir",
+                                      style: TextStyle(
+                                        color: primaryColor,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
                                     value: needDriver,
                                     onChanged: (bool? value) {
                                       setState(() {
                                         needDriver = value ?? false;
                                       });
                                     },
+                                    activeColor: primaryColor,
                                   ),
-                                  // Pilihan Transmisi
                                   ListTile(
-                                    title: Text("Pilihan Transmisi"),
+                                    title: Text(
+                                      "Pilihan Transmisi",
+                                      style: TextStyle(
+                                        color: primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ),
                                   RadioListTile<String>(
                                     title: Text("Manual"),
@@ -160,6 +188,7 @@ class _DetailSewaState extends State<DetailSewa> {
                                         transmission = value!;
                                       });
                                     },
+                                    activeColor: primaryColor,
                                   ),
                                   RadioListTile<String>(
                                     title: Text("Matic"),
@@ -170,18 +199,26 @@ class _DetailSewaState extends State<DetailSewa> {
                                         transmission = value!;
                                       });
                                     },
+                                    activeColor: primaryColor,
                                   ),
-                                  // Tombol Konfirmasi
                                   ElevatedButton(
                                     onPressed: () {
                                       Navigator.pop(context);
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(content: Text("Penyewaan mobil ${widget.mobil.namaMobil} sedang di Proses")),
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                            content: Text(
+                                                "Penyewaan mobil ${widget.mobil.namaMobil} sedang di Proses")),
                                       );
                                     },
                                     child: Text("Konfirmasi"),
+                                    style: ElevatedButton.styleFrom(
+                                      foregroundColor: Colors.white,
+                                      backgroundColor:
+                                          primaryColor, // Warna teks putih
+                                    ),
                                   ),
-                                  SizedBox(height: 30,)
+                                  SizedBox(height: 30),
                                 ],
                               ),
                             );
@@ -191,14 +228,18 @@ class _DetailSewaState extends State<DetailSewa> {
                     },
                   );
                 },
-                child: Text("Sewa Sekarang", style: TextStyle(fontSize: 18)),
+                child: Text(
+                  "Sewa Sekarang",
+                  style: TextStyle(fontSize: 18),
+                ),
                 style: ElevatedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(vertical: 15),
+                  foregroundColor: Colors.white,
+                  backgroundColor: primaryColor,
+                  padding:
+                      EdgeInsets.symmetric(vertical: 15), // Warna teks putih
                 ),
               ),
             ),
-
-
           ],
         ),
       ),
