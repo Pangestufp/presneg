@@ -14,43 +14,53 @@ class _SewaState extends State<Sewa> {
     Mobil(
         foto: "assets/images/Toyota_Avanza.png",
         namaMobil: "Toyota Avanza",
-        harga: "Rp 350.000 / hari"),
+        harga: "Rp 350.000 / hari",
+        kapasitas: "Kapasitas: 6-7 orang"),
     Mobil(
         foto: "assets/images/Toyota_Calya.png",
         namaMobil: "Toyota Calya",
-        harga: "Rp 300.000 / hari"),
+        harga: "Rp 300.000 / hari",
+        kapasitas: "Kapasitas: 4-5 orang"),
     Mobil(
         foto: "assets/images/Honda_Brio.png",
         namaMobil: "Honda Brio",
-        harga: "Rp 300.000 / hari"),
+        harga: "Rp 300.000 / hari",
+        kapasitas: "Kapasitas: 4-5 orang"),
     Mobil(
         foto: "assets/images/Mitsubishi_Xpander.png",
         namaMobil: "Mitsubishi Xpander",
-        harga: "Rp 400.000 / hari"),
+        harga: "Rp 400.000 / hari",
+        kapasitas: "Kapasitas: 6-7 orang"),
     Mobil(
         foto: "assets/images/Daihatsu_Xenia.png",
         namaMobil: "Daihatsu Xenia",
-        harga: "Rp 350.000 / hari"),
+        harga: "Rp 350.000 / hari",
+        kapasitas: "Kapasitas: 6-7 orang"),
     Mobil(
         foto: "assets/images/Daihatsu_Ayla.png",
         namaMobil: "Daihatsu Ayla",
-        harga: "Rp 250.000 / hari"),
+        harga: "Rp 250.000 / hari",
+        kapasitas: "Kapasitas: 4 orang"),
     Mobil(
         foto: "assets/images/Daihatsu_Sigra.png",
         namaMobil: "Daihatsu Sigra",
-        harga: "Rp 250.000 / hari"),
+        harga: "Rp 250.000 / hari",
+        kapasitas: "Kapasitas: 4-5 orang"),
     Mobil(
         foto: "assets/images/Toyota_Agya.png",
         namaMobil: "Toyota Agya",
-        harga: "Rp 250.000 / hari"),
+        harga: "Rp 250.000 / hari",
+        kapasitas: "Kapasitas: 4-5 orang"),
     Mobil(
         foto: "assets/images/Suzuki_Ertiga.png",
         namaMobil: "Suzuki Ertiga",
-        harga: "Rp 330.000 / hari"),
+        harga: "Rp 330.000 / hari",
+        kapasitas: "Kapasitas: 6-7 orang"),
     Mobil(
         foto: "assets/images/Toyota_Innova.png",
         namaMobil: "Toyota Innova",
-        harga: "Rp 450.000 / hari"),
+        harga: "Rp 450.000 / hari",
+        kapasitas: "Kapasitas: 6-7 orang"),
   ];
 
   List<Mobil> displayedMobil = [];
@@ -122,7 +132,8 @@ class _SewaState extends State<Sewa> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DetailSewa(mobil: mobil)),
+                  MaterialPageRoute(
+                      builder: (context) => DetailSewa(mobil: mobil)),
                 );
               },
               child: Card(
@@ -135,7 +146,8 @@ class _SewaState extends State<Sewa> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(15)),
                       child: Image.asset(
                         mobil.foto,
                         height: 100,
@@ -175,7 +187,8 @@ class _SewaState extends State<Sewa> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => DetailSewa(mobil: mobil),
+                                  builder: (context) =>
+                                      DetailSewa(mobil: mobil),
                                 ),
                               );
                             },
@@ -196,5 +209,4 @@ class _SewaState extends State<Sewa> {
       ),
     );
   }
-
 }

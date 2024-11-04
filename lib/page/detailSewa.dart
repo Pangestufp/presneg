@@ -55,6 +55,11 @@ class _DetailSewaState extends State<DetailSewa> {
               "Harga: ${widget.mobil.harga}",
               style: TextStyle(fontSize: 18, color: Colors.grey[700]),
             ),
+            SizedBox(height: 8),
+            Text(
+              "${widget.mobil.kapasitas}",
+              style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+            ),
             SizedBox(height: 16),
             Text(
               "Deskripsi:",
